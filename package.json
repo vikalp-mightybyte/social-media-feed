@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "social-media-mini-feed",
   "private": true,
   "scripts": {
     "build": "turbo build",

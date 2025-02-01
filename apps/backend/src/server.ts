@@ -5,13 +5,10 @@ import cors from 'cors';
 import express from 'express';
 import http from 'http';
 import { buildSchema } from './graphql/build-schema';
-import {Resource} from 'sst'
+import config from './config/config';
 
 export async function createServer() {
-
-  // console.log("Resource: ", Resource.DB.username);
-  
-
+  console.log('config:', JSON.stringify(config, null, 2));
 
   const schema = await buildSchema();
 
@@ -36,7 +33,9 @@ export async function createServer() {
   return {
     app,
     http: httpServer,
-    start: async ({ port }: { port: number }) => {
+    start: async ({
+      port = config.API_SERVER_PORT,
+    }: { port?: number } = {}) => {
       await new Promise<void>((resolve) => {
         httpServer.listen({ port }, resolve);
       });

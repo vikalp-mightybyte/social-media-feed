@@ -1,13 +1,12 @@
 import 'reflect-metadata';
 import { createServer } from './server';
+import config from './config/config';
 
 async function bootstrap() {
-  const PORT = 4000;
-
   const server = await createServer();
-  await server.start({ port: PORT });
+  await server.start();
 
-  console.log(`🚀 Server is running at http://localhost:${PORT}`);
+  console.log(`🚀 Server is running at http://localhost:${config.API_SERVER_PORT}`);
 }
 
 bootstrap().catch(console.error);

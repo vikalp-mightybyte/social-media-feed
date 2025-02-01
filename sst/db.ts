@@ -7,7 +7,7 @@ export const database = new sst.aws.Postgres('DB', {
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DB,
-    port: 5432,
+    port: 5434,
   },
 });
 

@@ -1,6 +1,6 @@
 import { vpc } from './vpc';
 
-export const database = new sst.aws.Postgres('DB', {
+const database = new sst.aws.Postgres('DB', {
   vpc,
   proxy: true,
   dev: {
@@ -11,6 +11,8 @@ export const database = new sst.aws.Postgres('DB', {
   },
 });
 
+const databaseUrl = $interpolate`postgresql://${database.username}:${database.password}@${database.host}:${database.port}/${database.database}`;
+
 // Runs only in dev mode
 new sst.x.DevCommand('Docker:local', {
   dev: {
@@ -18,3 +20,5 @@ new sst.x.DevCommand('Docker:local', {
     title: 'Docker Compose: Local',
   },
 });
+
+export { databaseUrl, database };

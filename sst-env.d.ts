@@ -22,6 +22,15 @@ declare module "sst" {
       "bastion": string
       "type": "sst.aws.Vpc"
     }
+    "UserPool": {
+      "id": string
+      "type": "sst.aws.CognitoUserPool"
+    }
+    "UserPoolWebClient": {
+      "id": string
+      "secret": string
+      "type": "sst.aws.CognitoUserPoolClient"
+    }
     "Web": {
       "type": "sst.aws.Nextjs"
       "url": string

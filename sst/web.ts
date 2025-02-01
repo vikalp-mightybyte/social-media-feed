@@ -1,5 +1,4 @@
 import { api } from './api';
-import { database } from './db';
 import { cognitoWebClient, cognitoUserPool } from './auth';
 
 const region = aws.getRegionOutput();
@@ -14,5 +13,4 @@ export const web = new sst.aws.Nextjs('Web', {
     // COGNITO_CLIENT_SECRET: cognitoWebClient.secret,
     // COGNITO_ISSUER: $interpolate`https://cognito-idp.${region.name}.amazonaws.com/${cognitoUserPool.id}`,
   },
-  link: [database],
 });

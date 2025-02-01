@@ -4,6 +4,12 @@ import { Field, ID, InputType, ObjectType } from 'type-graphql';
 export class Post {
   @Field(() => ID)
   id!: string;
+
+  @Field()
+  title!: string;
+
+  @Field()
+  content!: string;
 }
 
 @InputType()

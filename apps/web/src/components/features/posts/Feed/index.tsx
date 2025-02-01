@@ -1,7 +1,7 @@
 'use client';
 
 import { Post } from '@/components/features/posts/Post';
-import { useFeed } from '@/data-access/useFeed';
+import { useFeed } from '@/data-access/queries';
 
 export function Feed() {
   const { data, loading, error } = useFeed({ limit: 10 });

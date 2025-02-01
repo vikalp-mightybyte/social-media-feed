@@ -2,7 +2,7 @@
 
 import type { Post as PostType } from '@/__generated__/graphql';
 import { PostCard } from '@/components/ui/PostCard';
-import { useLikePost } from '@/data-access/useLikePost';
+import { useLikePost } from '@/data-access/mutations';
 
 interface PostProps {
   post: PostType;

@@ -7,10 +7,9 @@ import http from 'http';
 import { buildSchema } from './graphql/build-schema';
 import config from './config/config';
 import { bootstrapDatabase } from './db/setup';
+import { createContext } from './middleware/auth';
 
 export async function createServer() {
-  console.log('config:', JSON.stringify(config, null, 2));
-
   const schema = await buildSchema();
   await bootstrapDatabase();
 
@@ -26,10 +25,9 @@ export async function createServer() {
   app.use(
     cors(),
     express.json({ limit: '50mb' }),
-    expressMiddleware(
-      server
-      // { context: contextProvider }
-    )
+    expressMiddleware(server, {
+      context: createContext,
+    })
   );
 
   return {

@@ -1,2 +1,3 @@
 export * from './apollo-client';
-export * from './useCreatePost';
+export * from './queries';
+export * from './mutations';

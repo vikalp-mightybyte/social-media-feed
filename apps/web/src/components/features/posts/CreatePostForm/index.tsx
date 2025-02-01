@@ -1,18 +1,24 @@
 'use client';
 
 import { useCreatePost } from '@/data-access';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useState } from 'react';
+import { Input } from '@/components/ui/Input';
+import { Textarea } from '@/components/ui/Textarea';
+import { Button } from '@/components/ui/Button';
 
 interface CreatePostFormProps {
   onSuccess: () => void;
 }
 
-export default function CreatePostForm({ onSuccess }: CreatePostFormProps) {
+export function CreatePostForm({ onSuccess }: CreatePostFormProps) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [createPost, { loading }] = useCreatePost();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { user } = useAuthenticator();
+  const [createPost, { loading }] = useCreatePost(user.userId);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     createPost({
@@ -32,12 +38,11 @@ export default function CreatePostForm({ onSuccess }: CreatePostFormProps) {
         >
           Title
         </label>
-        <input
+        <Input
           type="text"
           id="title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="mt-1 p-2 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
           required
         />
       </div>
@@ -48,22 +53,21 @@ export default function CreatePostForm({ onSuccess }: CreatePostFormProps) {
         >
           Content
         </label>
-        <textarea
+        <Textarea
           id="content"
           value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="mt-1 p-2 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value)}
           rows={3}
           required
-        ></textarea>
+        />
       </div>
-      <button
+      <Button
         type="submit"
         disabled={loading}
-        className="w-full cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-200 disabled:bg-blue-300"
+        className="w-full"
       >
         Create Post
-      </button>
+      </Button>
     </form>
   );
 }

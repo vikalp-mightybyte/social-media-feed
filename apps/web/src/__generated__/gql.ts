@@ -14,14 +14,16 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "\n  mutation CreatePost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      id\n      title\n      content\n      createdAt\n    }\n  }\n": typeof types.CreatePostDocument,
+    "\n  mutation CreatePost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      id\n      title\n      content\n      createdAt\n      userId\n    }\n  }\n": typeof types.CreatePostDocument,
     "\n  fragment NewPost on Post {\n    id\n    title\n    content\n    createdAt\n  }\n": typeof types.NewPostFragmentDoc,
-    "\n  query Feed($limit: Int, $next: String) {\n    feed(limit: $limit, next: $next) {\n      items {\n        id\n        title\n        content\n        createdAt\n      }\n      next\n    }\n  }\n": typeof types.FeedDocument,
+    "\n  mutation LikePost($input: LikePostInput!) {\n    likePost(input: $input) {\n      id\n      title\n      content\n      createdAt\n      userId\n      likesCount\n      isLiked\n    }\n  }\n": typeof types.LikePostDocument,
+    "\n  query Feed($limit: Int, $next: String) {\n    feed(limit: $limit, next: $next) {\n      items {\n        id\n        title\n        content\n        createdAt\n        userId\n        likesCount\n        isLiked\n      }\n      next\n    }\n  }\n": typeof types.FeedDocument,
 };
 const documents: Documents = {
-    "\n  mutation CreatePost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      id\n      title\n      content\n      createdAt\n    }\n  }\n": types.CreatePostDocument,
+    "\n  mutation CreatePost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      id\n      title\n      content\n      createdAt\n      userId\n    }\n  }\n": types.CreatePostDocument,
     "\n  fragment NewPost on Post {\n    id\n    title\n    content\n    createdAt\n  }\n": types.NewPostFragmentDoc,
-    "\n  query Feed($limit: Int, $next: String) {\n    feed(limit: $limit, next: $next) {\n      items {\n        id\n        title\n        content\n        createdAt\n      }\n      next\n    }\n  }\n": types.FeedDocument,
+    "\n  mutation LikePost($input: LikePostInput!) {\n    likePost(input: $input) {\n      id\n      title\n      content\n      createdAt\n      userId\n      likesCount\n      isLiked\n    }\n  }\n": types.LikePostDocument,
+    "\n  query Feed($limit: Int, $next: String) {\n    feed(limit: $limit, next: $next) {\n      items {\n        id\n        title\n        content\n        createdAt\n        userId\n        likesCount\n        isLiked\n      }\n      next\n    }\n  }\n": types.FeedDocument,
 };
 
 /**
@@ -41,7 +43,7 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation CreatePost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      id\n      title\n      content\n      createdAt\n    }\n  }\n"): (typeof documents)["\n  mutation CreatePost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      id\n      title\n      content\n      createdAt\n    }\n  }\n"];
+export function gql(source: "\n  mutation CreatePost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      id\n      title\n      content\n      createdAt\n      userId\n    }\n  }\n"): (typeof documents)["\n  mutation CreatePost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      id\n      title\n      content\n      createdAt\n      userId\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -49,7 +51,11 @@ export function gql(source: "\n  fragment NewPost on Post {\n    id\n    title\n
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query Feed($limit: Int, $next: String) {\n    feed(limit: $limit, next: $next) {\n      items {\n        id\n        title\n        content\n        createdAt\n      }\n      next\n    }\n  }\n"): (typeof documents)["\n  query Feed($limit: Int, $next: String) {\n    feed(limit: $limit, next: $next) {\n      items {\n        id\n        title\n        content\n        createdAt\n      }\n      next\n    }\n  }\n"];
+export function gql(source: "\n  mutation LikePost($input: LikePostInput!) {\n    likePost(input: $input) {\n      id\n      title\n      content\n      createdAt\n      userId\n      likesCount\n      isLiked\n    }\n  }\n"): (typeof documents)["\n  mutation LikePost($input: LikePostInput!) {\n    likePost(input: $input) {\n      id\n      title\n      content\n      createdAt\n      userId\n      likesCount\n      isLiked\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query Feed($limit: Int, $next: String) {\n    feed(limit: $limit, next: $next) {\n      items {\n        id\n        title\n        content\n        createdAt\n        userId\n        likesCount\n        isLiked\n      }\n      next\n    }\n  }\n"): (typeof documents)["\n  query Feed($limit: Int, $next: String) {\n    feed(limit: $limit, next: $next) {\n      items {\n        id\n        title\n        content\n        createdAt\n        userId\n        likesCount\n        isLiked\n      }\n      next\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

@@ -9,6 +9,9 @@ const FEED_QUERY = gql(`
         title
         content
         createdAt
+        userId
+        likesCount
+        isLiked
       }
       next
     }

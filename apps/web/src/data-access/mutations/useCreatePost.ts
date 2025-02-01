@@ -9,6 +9,7 @@ const CREATE_POST_MUTATION = gql(`
       title
       content
       createdAt
+      userId
     }
   }
 `);
@@ -22,7 +23,7 @@ const NEW_POST_FRAGMENT = gql(`
   }
 `);
 
-export function useCreatePost() {
+export function useCreatePost(userId: string) {
   return useMutation(CREATE_POST_MUTATION, {
     optimisticResponse({ input }) {
       const newPost: Post = {
@@ -30,6 +31,9 @@ export function useCreatePost() {
         title: input.title,
         content: input.content,
         createdAt: new Date().toISOString(),
+        userId,
+        likesCount: 0,
+        isLiked: false,
         __typename: 'Post',
       };
 

@@ -13,8 +13,14 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTimeISO
 
+input LikePostInput {
+  isLiked: Boolean!
+  postId: ID!
+}
+
 type Mutation {
   createPost(input: CreatePostInput!): Post!
+  likePost(input: LikePostInput!): Post!
 }
 
 type PaginatedFeedResult implements PaginatedResult {
@@ -30,7 +36,10 @@ type Post {
   content: String!
   createdAt: DateTimeISO!
   id: ID!
+  isLiked: Boolean!
+  likesCount: Float!
   title: String!
+  userId: ID!
 }
 
 type Query {

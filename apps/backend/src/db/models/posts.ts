@@ -7,4 +7,6 @@ export class PostModel extends Model {
   title!: string;
   content!: string;
   createdAt!: Date;
+  userId!: string;
+  likesCount!: number;
 }

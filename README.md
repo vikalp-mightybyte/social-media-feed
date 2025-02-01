@@ -65,6 +65,22 @@ yarn dev
 - Backend (GraphQL) runs at: `http://localhost:4000/graphql`
 - Database runs at: `localhost:5432`
 
+### GraphQL Code Generation
+
+For efficient frontend development, you can run the GraphQL code generator in watch mode parallel to your development server. This automatically generates TypeScript types and React hooks based on your GraphQL operations.
+
+```bash
+# In a separate terminal, run:
+yarn workspace web gql:generate
+```
+
+This will:
+- Watch for changes in your GraphQL queries and mutations
+- Automatically generate typed hooks in `apps/web/src/__generated__`
+- Provide type-safe GraphQL operations in your React components
+
+You can keep this running alongside `yarn dev` for real-time type generation as you develop.
+
 ## SST Notes
 
 ### Key Features Used

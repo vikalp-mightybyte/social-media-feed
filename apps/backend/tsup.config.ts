@@ -12,5 +12,6 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   target: 'node18',
-  // noExternal: [/(.*)/],
+  external: ['better-sqlite3', 'sqlite3', 'pg-query-stream', 'tedious', 'mysql', 'mysql2', 'oracledb'],
+  noExternal: [/^(?!better-sqlite3|sqlite3|pg-query-stream|tedious|mysql|mysql2|oracledb).*$/],
 });

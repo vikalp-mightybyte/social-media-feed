@@ -33,9 +33,7 @@ export async function createServer() {
   return {
     app,
     http: httpServer,
-    start: async ({
-      port = config.API_SERVER_PORT,
-    }: { port?: number } = {}) => {
+    start: async ({ port }: { port?: number } = {}) => {
       await new Promise<void>((resolve) => {
         httpServer.listen({ port }, resolve);
       });

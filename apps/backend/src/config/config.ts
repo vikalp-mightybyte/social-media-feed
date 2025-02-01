@@ -8,7 +8,10 @@ dotenv.config({
 
 // Define and validate environment variables schema
 const envSchema = z.object({
-  API_SERVER_PORT: z.string().transform((val) => parseInt(val, 10)),
+  API_SERVER_PORT: z
+    .string()
+    .default('4000')
+    .transform((val) => parseInt(val, 10)),
   DATABASE_URL: z.string().url(),
   COGNITO_USER_POOL_ID: z.string(),
   COGNITO_WEB_CLIENT_ID: z.string(),

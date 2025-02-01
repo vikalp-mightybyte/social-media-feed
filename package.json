@@ -4,10 +4,14 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "sso": "aws sso login --sso-session=social-media-app",
+    "deploy:preview": "sst deploy",
+    "deploy:dev": "sst deploy --stage dev"
   },
   "devDependencies": {
+    "@types/aws-lambda": "8.10.147",
     "prettier": "^3.4.2",
     "turbo": "^2.3.4",
     "typescript": "5.7.3"
@@ -19,5 +23,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "esbuild-plugin-tsc": "^0.4.0",
+    "sst": "3.6.35"
+  }
 }

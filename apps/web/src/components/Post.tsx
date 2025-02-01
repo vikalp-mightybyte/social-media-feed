@@ -1,12 +1,11 @@
-import type { Post as PostType } from '@/lib/mockData';
+import type { Post as PostType } from '@/__generated__/graphql';
 import { Heart } from 'lucide-react';
 
 interface PostProps {
   post: PostType;
-  onLike: () => void;
 }
 
-export default function Post({ post, onLike }: PostProps) {
+export default function Post({ post }: PostProps) {
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 transition-all duration-300 hover:shadow-xl">
       <h2 className="text-2xl font-semibold mb-3 text-gray-800">
@@ -18,11 +17,11 @@ export default function Post({ post, onLike }: PostProps) {
           {new Date(post.createdAt).toLocaleDateString()}
         </span>
         <button
-          onClick={onLike}
+          // onClick={onLike}
           className="flex cursor-pointer items-center space-x-1 text-pink-500 hover:text-pink-600 transition-colors duration-200"
         >
           <Heart className="w-5 h-5" />
-          <span>{post.likes}</span>
+          {/* <span>{post.likes}</span> */}
         </button>
       </div>
     </div>

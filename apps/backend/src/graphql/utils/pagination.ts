@@ -14,7 +14,7 @@ export class PaginationArgs {
 
 @InterfaceType()
 export abstract class PaginatedResult<T> {
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   next!: string | null;
 
   abstract items: T[];

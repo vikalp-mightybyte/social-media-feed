@@ -12,10 +12,10 @@ export const buildSchema = once(() =>
     // authChecker,
     resolvers,
     validate: true,
-    // emitSchemaFile: {
-    //   path: resolve(__dirname, '..', 'schema.gql'),
-    //   sortedSchema: true,
-    //   // commentDescriptions: true,
-    // },
+    emitSchemaFile: {
+      path: resolve(__dirname, '..', 'schema.gql'),
+      sortedSchema: true,
+      // commentDescriptions: true,
+    },
   })
 );

@@ -10,6 +10,9 @@ export class Post {
 
   @Field()
   content!: string;
+
+  @Field()
+  createdAt!: Date;
 }
 
 @InputType()

@@ -11,6 +11,6 @@ export class PostResolver {
 
   @Mutation(() => Post)
   async createPost(@Arg('input') { title, content }: CreatePostInput) {
-    return PostModel.query().insert({ title, content });
+    return PostModel.query().insert({ title, content }).returning('*');
   }
 }

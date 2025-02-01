@@ -1,9 +1,7 @@
 'use client';
 
+import { useCreatePost } from '@/data-access';
 import { useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '@/lib/api';
-import type { Post } from '@/lib/mockData';
 
 interface CreatePostFormProps {
   onSuccess: () => void;
@@ -12,41 +10,17 @@ interface CreatePostFormProps {
 export default function CreatePostForm({ onSuccess }: CreatePostFormProps) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const queryClient = useQueryClient();
-
-  const createPostMutation = useMutation({
-    mutationFn: (newPost: { title: string; content: string }) =>
-      api.createPost(newPost.title, newPost.content),
-    onMutate: async (newPost) => {
-      await queryClient.cancelQueries({ queryKey: ['posts'] });
-      const previousPosts = queryClient.getQueryData<Post[]>(['posts']);
-      queryClient.setQueryData<Post[]>(['posts'], (old) => [
-        {
-          id: Date.now().toString(),
-          ...newPost,
-          likes: 0,
-          createdAt: new Date().toISOString(),
-        },
-        ...(old || []),
-      ]);
-      return { previousPosts };
-    },
-    onError: (err, newPost, context) => {
-      queryClient.setQueryData(['posts'], context?.previousPosts);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
-    },
-    onSuccess: () => {
-      setTitle('');
-      setContent('');
-      onSuccess();
-    },
-  });
+  const [createPost, { loading }] = useCreatePost();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    createPostMutation.mutate({ title, content });
+
+    createPost({
+      variables: {
+        input: { title, content },
+      },
+      onCompleted: onSuccess,
+    });
   };
 
   return (
@@ -85,10 +59,10 @@ export default function CreatePostForm({ onSuccess }: CreatePostFormProps) {
       </div>
       <button
         type="submit"
-        disabled={createPostMutation.isPending}
+        disabled={loading}
         className="w-full cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-200 disabled:bg-blue-300"
       >
-        {createPostMutation.isPending ? 'Creating...' : 'Create Post'}
+        Create Post
       </button>
     </form>
   );

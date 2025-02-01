@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "gql:generate": "graphql-codegen --watch"
   },
   "dependencies": {
     "@apollo/client": "^3.12.8",
@@ -24,11 +25,16 @@
     "tailwindcss": "^4.0.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.4",
+    "@graphql-codegen/client-preset": "^4.6.1",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@parcel/watcher": "^2.5.1",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "@types/node": "^22",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
-    "typescript": "5.7.3"
+    "graphql": "^16.10.0",
+    "typescript": "^5.7.3"
   }
 }
